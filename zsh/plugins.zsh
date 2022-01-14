@@ -1,0 +1,1 @@
+source ~/.dotfiles/zsh/plugins/spectrum/spectrum.zsh

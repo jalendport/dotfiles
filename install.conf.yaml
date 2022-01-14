@@ -2,5 +2,6 @@
 
 - link:
     ~/.dotfiles: ''
-    ~/.zshrc:
     ~/.gitignore: gitignore-global
+    ~/.hushlogin:
+    ~/.zshrc:
