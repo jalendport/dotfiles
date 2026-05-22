@@ -5,6 +5,15 @@
     ~/.gitignore: gitignore-global
     ~/.hushlogin:
     ~/.zshrc:
+    ~/.config/counselors/config.json:
+      path: ai/counselors-config.json
+      create: true
+    ~/.claude/settings.json:
+      path: ai/claude/settings.json
+      create: true
+    ~/.claude/commands:
+      path: ai/claude/commands
+      create: true
 
 - shell:
   - command: git config --global core.excludesfile ~/.gitignore
