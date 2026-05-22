@@ -1,7 +1,7 @@
 - clean: ['~']
 
 - link:
-    ~/.dotfiles: ''
+    ~/.dotfiles: .
     ~/.gitignore: gitignore-global
     ~/.hushlogin:
     ~/.zshrc:
