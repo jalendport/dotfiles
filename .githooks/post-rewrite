@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# git pull --rebase fires post-rewrite instead of post-merge.
+set -e
+[ "$1" = "rebase" ] || exit 0
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+"$DIR/install"

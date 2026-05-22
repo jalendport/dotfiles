@@ -18,3 +18,5 @@
 - shell:
   - command: git config --global core.excludesfile ~/.gitignore
     description: Configure git to use the global gitignore
+  - command: git config core.hooksPath .githooks
+    description: Re-run dotbot after pulls via repo-tracked git hooks
