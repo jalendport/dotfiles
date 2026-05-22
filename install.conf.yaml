@@ -5,3 +5,7 @@
     ~/.gitignore: gitignore-global
     ~/.hushlogin:
     ~/.zshrc:
+
+- shell:
+  - command: git config --global core.excludesfile ~/.gitignore
+    description: Configure git to use the global gitignore
