@@ -5,6 +5,7 @@
     ~/.gitignore: gitignore-global
     ~/.hushlogin:
     ~/.zshrc:
+    ~/.zprofile:
     ~/.config/counselors/config.json:
       path: ai/counselors-config.json
       create: true
