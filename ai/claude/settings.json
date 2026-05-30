@@ -56,6 +56,6 @@
     ]
   },
   "effortLevel": "high",
-  "theme": "light",
+  "theme": "auto",
   "skipAutoPermissionPrompt": true
 }
