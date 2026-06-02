@@ -52,7 +52,8 @@
       "Bash(docker logs *)",
       "Bash(docker images *)",
       "Bash(brew list *)",
-      "Bash(brew info *)"
+      "Bash(brew info *)",
+      "Bash(counselors:*)"
     ]
   },
   "effortLevel": "high",
