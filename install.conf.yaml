@@ -15,9 +15,28 @@
     ~/.claude/commands:
       path: ai/claude/commands
       create: true
+    ~/.claude/skills:
+      path: ai/skills
+      create: true
 
 - shell:
   - command: git config --global core.excludesfile ~/.gitignore
     description: Configure git to use the global gitignore
   - command: git config core.hooksPath .githooks
     description: Re-run dotbot after pulls via repo-tracked git hooks
+  - command: |
+      src="$PWD/ai/skills"
+      for dir in "$HOME/.codex/skills" "$HOME/.gemini/antigravity-cli/skills"; do
+        mkdir -p "$dir" || continue
+        # prune dangling skill symlinks (e.g. a skill deleted from the repo)
+        ls -1 "$dir" 2>/dev/null | while IFS= read -r name; do
+          link="$dir/$name"
+          [ -L "$link" ] && [ ! -e "$link" ] && rm -f "$link"
+        done
+        # link every skill folder from the repo, preserving each tool's built-ins
+        ls -1 "$src" 2>/dev/null | while IFS= read -r name; do
+          [ -d "$src/$name" ] && ln -sfn "$src/$name" "$dir/$name"
+        done
+      done
+      true
+    description: Link shared skills into Codex and agy (Antigravity)
