@@ -15,6 +15,16 @@
     ~/.claude/settings.json:
       path: ai/claude/settings.json
       create: true
+    # Shared global agent instructions — one canonical AGENTS.md linked into each tool
+    ~/.claude/CLAUDE.md:
+      path: ai/AGENTS.md
+      create: true
+    ~/.codex/AGENTS.md:
+      path: ai/AGENTS.md
+      create: true
+    ~/.gemini/antigravity-cli/AGENTS.md:
+      path: ai/AGENTS.md
+      create: true
     ~/.claude/commands:
       path: ai/claude/commands
       create: true
