@@ -294,7 +294,7 @@
       "timeout": 900
     },
     "agy-flash-low": {
-      "binary": "agy",
+      "binary": "agy-counselor",
       "adapter": "custom",
       "readOnly": {
         "level": "bestEffort"
@@ -309,7 +309,7 @@
       "timeout": 900
     },
     "agy-flash-med": {
-      "binary": "agy",
+      "binary": "agy-counselor",
       "adapter": "custom",
       "readOnly": {
         "level": "bestEffort"
@@ -324,7 +324,7 @@
       "timeout": 900
     },
     "agy-flash-high": {
-      "binary": "agy",
+      "binary": "agy-counselor",
       "adapter": "custom",
       "readOnly": {
         "level": "bestEffort"
@@ -339,7 +339,7 @@
       "timeout": 900
     },
     "agy-pro-low": {
-      "binary": "agy",
+      "binary": "agy-counselor",
       "adapter": "custom",
       "readOnly": {
         "level": "bestEffort"
@@ -348,13 +348,13 @@
         "--model",
         "Gemini 3.1 Pro (Low)",
         "--print-timeout",
-        "10m",
+        "18m",
         "-p"
       ],
-      "timeout": 900
+      "timeout": 1200
     },
     "agy-pro-high": {
-      "binary": "agy",
+      "binary": "agy-counselor",
       "adapter": "custom",
       "readOnly": {
         "level": "bestEffort"
@@ -363,13 +363,13 @@
         "--model",
         "Gemini 3.1 Pro (High)",
         "--print-timeout",
-        "10m",
+        "18m",
         "-p"
       ],
-      "timeout": 900
+      "timeout": 1200
     },
     "agy-3-flash": {
-      "binary": "agy",
+      "binary": "agy-counselor",
       "adapter": "custom",
       "readOnly": {
         "level": "bestEffort"

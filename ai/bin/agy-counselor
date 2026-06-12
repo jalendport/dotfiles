@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Wrapper for `agy` used by counselors (~/.config/counselors/config.json).
+#
+# Why this exists — two print-mode failure modes with Gemini Pro models:
+#   1. Pro sometimes writes its answer to a file (e.g. review.md) and prints
+#      only a pointer; counselors reads stdout, so the answer is lost.
+#   2. Without explicit guidance Pro explores exhaustively and can blow the
+#      --print-timeout, after which agy prints "Error: timed out waiting for
+#      response" and discards all work.
+# The wrapper appends steering to the final prompt argument so the model
+# always emits its complete answer inline.
+set -euo pipefail
+
+STEERING='
+
+CRITICAL OUTPUT REQUIREMENTS (you are running non-interactively; your chat reply is the ONLY output anyone will ever see):
+- Write your COMPLETE final answer directly in your chat response.
+- Do NOT write your answer or any notes to a file. Do NOT create, modify, or delete any files. You have read-only intent.
+- Budget your time: this session has a hard wall-clock timeout. Read what you need efficiently, then commit to producing the full final answer well before the limit. A complete answer now beats a perfect answer that never arrives.'
+
+# Only steer real print-mode runs; pass through --version/--help/subcommands
+# untouched so health checks (e.g. `counselors doctor`) keep working.
+is_print=false
+for a in "$@"; do
+  case "$a" in
+    -p|--print|--prompt) is_print=true ;;
+  esac
+done
+
+args=("$@")
+n=${#args[@]}
+if $is_print && (( n > 0 )); then
+  i=$((n - 1))
+  args[$i]="${args[$i]}${STEERING}"
+fi
+exec agy "${args[@]}"
