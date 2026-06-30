@@ -56,7 +56,12 @@
       "Bash(counselors:*)"
     ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline.sh"
+  },
   "effortLevel": "high",
+  "tui": "fullscreen",
   "theme": "light",
   "skipAutoPermissionPrompt": true
 }
