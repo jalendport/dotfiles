@@ -19,6 +19,34 @@
         "opus"
       ]
     },
+    "claude-opus-high": {
+      "binary": "claude",
+      "adapter": "claude",
+      "readOnly": {
+        "level": "enforced"
+      },
+      "extraFlags": [
+        "--model",
+        "opus",
+        "--effort",
+        "high"
+      ],
+      "timeout": 900
+    },
+    "claude-opus-xhigh": {
+      "binary": "claude",
+      "adapter": "claude",
+      "readOnly": {
+        "level": "enforced"
+      },
+      "extraFlags": [
+        "--model",
+        "opus",
+        "--effort",
+        "xhigh"
+      ],
+      "timeout": 900
+    },
     "claude-opus-max": {
       "binary": "claude",
       "adapter": "claude",
@@ -44,6 +72,34 @@
         "sonnet"
       ]
     },
+    "claude-sonnet-high": {
+      "binary": "claude",
+      "adapter": "claude",
+      "readOnly": {
+        "level": "enforced"
+      },
+      "extraFlags": [
+        "--model",
+        "sonnet",
+        "--effort",
+        "high"
+      ],
+      "timeout": 900
+    },
+    "claude-sonnet-max": {
+      "binary": "claude",
+      "adapter": "claude",
+      "readOnly": {
+        "level": "enforced"
+      },
+      "extraFlags": [
+        "--model",
+        "sonnet",
+        "--effort",
+        "max"
+      ],
+      "timeout": 900
+    },
     "claude-haiku": {
       "binary": "claude",
       "adapter": "claude",
@@ -54,6 +110,34 @@
         "--model",
         "haiku"
       ]
+    },
+    "claude-haiku-high": {
+      "binary": "claude",
+      "adapter": "claude",
+      "readOnly": {
+        "level": "enforced"
+      },
+      "extraFlags": [
+        "--model",
+        "haiku",
+        "--effort",
+        "high"
+      ],
+      "timeout": 900
+    },
+    "codex-5.5-low": {
+      "binary": "codex",
+      "adapter": "codex",
+      "readOnly": {
+        "level": "enforced"
+      },
+      "extraFlags": [
+        "-m",
+        "gpt-5.5",
+        "-c",
+        "model_reasoning_effort=low"
+      ],
+      "timeout": 900
     },
     "codex-5.5-medium": {
       "binary": "codex",
@@ -97,7 +181,77 @@
       ],
       "timeout": 900
     },
-    "codex-5.4-mini": {
+    "codex-5.4-low": {
+      "binary": "codex",
+      "adapter": "codex",
+      "readOnly": {
+        "level": "enforced"
+      },
+      "extraFlags": [
+        "-m",
+        "gpt-5.4",
+        "-c",
+        "model_reasoning_effort=low"
+      ],
+      "timeout": 900
+    },
+    "codex-5.4-medium": {
+      "binary": "codex",
+      "adapter": "codex",
+      "readOnly": {
+        "level": "enforced"
+      },
+      "extraFlags": [
+        "-m",
+        "gpt-5.4",
+        "-c",
+        "model_reasoning_effort=medium"
+      ],
+      "timeout": 900
+    },
+    "codex-5.4-high": {
+      "binary": "codex",
+      "adapter": "codex",
+      "readOnly": {
+        "level": "enforced"
+      },
+      "extraFlags": [
+        "-m",
+        "gpt-5.4",
+        "-c",
+        "model_reasoning_effort=high"
+      ],
+      "timeout": 900
+    },
+    "codex-5.4-xhigh": {
+      "binary": "codex",
+      "adapter": "codex",
+      "readOnly": {
+        "level": "enforced"
+      },
+      "extraFlags": [
+        "-m",
+        "gpt-5.4",
+        "-c",
+        "model_reasoning_effort=xhigh"
+      ],
+      "timeout": 900
+    },
+    "codex-5.4-mini-low": {
+      "binary": "codex",
+      "adapter": "codex",
+      "readOnly": {
+        "level": "enforced"
+      },
+      "extraFlags": [
+        "-m",
+        "gpt-5.4-mini",
+        "-c",
+        "model_reasoning_effort=low"
+      ],
+      "timeout": 900
+    },
+    "codex-5.4-mini-medium": {
       "binary": "codex",
       "adapter": "codex",
       "readOnly": {
@@ -111,13 +265,118 @@
       ],
       "timeout": 900
     },
-    "agy": {
-      "binary": "agy",
+    "codex-5.4-mini-high": {
+      "binary": "codex",
+      "adapter": "codex",
+      "readOnly": {
+        "level": "enforced"
+      },
+      "extraFlags": [
+        "-m",
+        "gpt-5.4-mini",
+        "-c",
+        "model_reasoning_effort=high"
+      ],
+      "timeout": 900
+    },
+    "codex-5.4-mini-xhigh": {
+      "binary": "codex",
+      "adapter": "codex",
+      "readOnly": {
+        "level": "enforced"
+      },
+      "extraFlags": [
+        "-m",
+        "gpt-5.4-mini",
+        "-c",
+        "model_reasoning_effort=xhigh"
+      ],
+      "timeout": 900
+    },
+    "agy-flash-low": {
+      "binary": "agy-counselor",
       "adapter": "custom",
       "readOnly": {
         "level": "bestEffort"
       },
       "extraFlags": [
+        "--model",
+        "Gemini 3.5 Flash (Low)",
+        "--print-timeout",
+        "10m",
+        "-p"
+      ],
+      "timeout": 900
+    },
+    "agy-flash-med": {
+      "binary": "agy-counselor",
+      "adapter": "custom",
+      "readOnly": {
+        "level": "bestEffort"
+      },
+      "extraFlags": [
+        "--model",
+        "Gemini 3.5 Flash (Medium)",
+        "--print-timeout",
+        "10m",
+        "-p"
+      ],
+      "timeout": 900
+    },
+    "agy-flash-high": {
+      "binary": "agy-counselor",
+      "adapter": "custom",
+      "readOnly": {
+        "level": "bestEffort"
+      },
+      "extraFlags": [
+        "--model",
+        "Gemini 3.5 Flash (High)",
+        "--print-timeout",
+        "10m",
+        "-p"
+      ],
+      "timeout": 900
+    },
+    "agy-pro-low": {
+      "binary": "agy-counselor",
+      "adapter": "custom",
+      "readOnly": {
+        "level": "bestEffort"
+      },
+      "extraFlags": [
+        "--model",
+        "Gemini 3.1 Pro (Low)",
+        "--print-timeout",
+        "18m",
+        "-p"
+      ],
+      "timeout": 1200
+    },
+    "agy-pro-high": {
+      "binary": "agy-counselor",
+      "adapter": "custom",
+      "readOnly": {
+        "level": "bestEffort"
+      },
+      "extraFlags": [
+        "--model",
+        "Gemini 3.1 Pro (High)",
+        "--print-timeout",
+        "18m",
+        "-p"
+      ],
+      "timeout": 1200
+    },
+    "agy-3-flash": {
+      "binary": "agy-counselor",
+      "adapter": "custom",
+      "readOnly": {
+        "level": "bestEffort"
+      },
+      "extraFlags": [
+        "--model",
+        "Gemini 3 Flash",
         "--print-timeout",
         "10m",
         "-p"
@@ -126,20 +385,27 @@
     }
   },
   "groups": {
-    "quick": [
+    "light": [
       "claude-haiku",
-      "codex-5.4-mini",
-      "agy"
+      "codex-5.4-mini-medium",
+      "agy-flash-med"
     ],
-    "default": [
+    "daily": [
       "claude-sonnet",
-      "codex-5.5-high",
-      "agy"
+      "codex-5.5-medium",
+      "agy-flash-high"
     ],
-    "deep": [
+    "heavy": [
+      "claude-opus-high",
+      "codex-5.5-high",
+      "agy-pro-low"
+    ],
+    "impossible": [
       "claude-opus-max",
+      "claude-opus-xhigh",
       "codex-5.5-xhigh",
-      "agy"
+      "codex-5.4-xhigh",
+      "agy-pro-high"
     ]
   }
 }
