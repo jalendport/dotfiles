@@ -37,6 +37,8 @@
     description: Configure git to use the global gitignore
   - command: git config core.hooksPath .githooks
     description: Re-run dotbot after pulls via repo-tracked git hooks
+  - command: bash ai/codex/apply-statusline.sh
+    description: Configure Codex context status line
   - command: |
       src="$PWD/ai/skills"
       for dir in "$HOME/.codex/skills" "$HOME/.gemini/antigravity-cli/skills"; do
