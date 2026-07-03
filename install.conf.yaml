@@ -12,6 +12,9 @@
     ~/.config/ghostty/config:
       path: ghostty/config
       create: true
+    ~/.config/starship.toml:
+      path: starship/starship.toml
+      create: true
     ~/.local/bin/agy-counselor:
       path: ai/bin/agy-counselor
       create: true
