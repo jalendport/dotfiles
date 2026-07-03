@@ -1,0 +1,47 @@
+# Ghostty config  —  ~/.config/ghostty/config
+# Reference: https://ghostty.org/docs/config/reference
+# Reload after editing with Cmd+Shift+, (or just restart Ghostty).
+# NOTE: Ghostty does not support trailing comments on a value line —
+#       the "#" would be read as part of the value. Keep comments on their own line.
+
+# ── Theme ──────────────────────────────────────────────────────────
+# Dark, spacey palette. Browse all built-ins with: ghostty +list-themes
+# Tip: use `theme = light:<name>,dark:<name>` to auto-switch with macOS.
+theme = Spacedust
+
+# ── Font ───────────────────────────────────────────────────────────
+# Ghostty bundles JetBrains Mono (Nerd Font icons included) — no install needed.
+# Default family is already JetBrains Mono; uncomment font-family to pin it.
+font-size = 14
+# font-family = "JetBrains Mono"
+# Nudge the rendered weight up slightly (macOS). Strength is 0–255; raise for heavier.
+font-thicken = true
+font-thicken-strength = 120
+# Add a little vertical space to each cell (line height). Accepts points or e.g. 10%.
+adjust-cell-height = 10%
+
+# ── Window / appearance ────────────────────────────────────────────
+background-opacity = 0.95
+background-blur = true
+window-padding-x = 10
+window-padding-y = 8
+# Titlebar blends into the frosted background.
+macos-titlebar-style = transparent
+
+# ── macOS keyboard ─────────────────────────────────────────────────
+# ⌥+←/→ word jumps; Alt-keybinds work in shell/tmux/vim.
+macos-option-as-alt = true
+
+# ── Optional extras (uncomment to enable) ──────────────────────────
+# Skip the "close?" prompt when a process is still running:
+# confirm-close-surface = false
+# Quit Ghostty entirely when the last window closes:
+# quit-after-last-window-closed = true
+# Hide the mouse pointer while typing:
+# mouse-hide-while-typing = true
+# Restore windows/tabs on relaunch:
+# window-save-state = always
+# Cursor shape: block (default) | bar | underline | block_hollow
+# cursor-style = bar
+# Scrollback in bytes (default ~10MB):
+# scrollback-limit = 10000000

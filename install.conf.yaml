@@ -9,6 +9,9 @@
     ~/.config/counselors/config.json:
       path: ai/counselors-config.json
       create: true
+    ~/.config/ghostty/config:
+      path: ghostty/config
+      create: true
     ~/.local/bin/agy-counselor:
       path: ai/bin/agy-counselor
       create: true
