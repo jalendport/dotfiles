@@ -26,3 +26,12 @@ When you (an AI agent) make the commit on my behalf, end the message with a blan
 - Gemini / Antigravity (agy) → `Co-Authored-By: Gemini <noreply@google.com>`
 
 If I'm committing by hand with no agent involved, omit the trailer entirely.
+
+# Second brain vault (`~/brain`)
+
+I keep a git-synced Obsidian knowledge base at `/Users/jalendport/brain`. It's the *cold store* of my decisions, coding conventions, and curated best-practice notes (my Claude memory system is the always-loaded *hot cache* that links into it).
+
+- **When a coding task touches my preferences, a past decision, or a language/framework I keep conventions for, read the vault first**: start with `~/brain/Home.md` (the index), then the relevant `~/brain/conventions/<topic>/` and `~/brain/decisions/` notes. Use grep/glob over `~/brain`.
+- **Honor the tag contract** defined in `~/brain/AGENTS.md`: `status: best-practice` = prefer over your defaults; `status: adopted` conventions = how I want code written; `source: twitter` without `best-practice` = unverified lead; `status: draft`/`experimental`/`deprecated` = don't apply silently.
+- **Writing to the vault**: you may draft notes (set `author: claude`, `status: draft`, use `~/brain/templates/`). `~/brain` auto-syncs (obsidian-git commits + pushes every ~10 min), so you don't manage git at all — just write the file. The approval gate is the **`status` field, not git**: everything you write stays `status: draft` and unreviewed until I promote it (I work a `~/brain/Review.md` queue). **Never promote your own notes** to `accepted`/`adopted`/`best-practice` — that's my call. Grep before creating to avoid duplicates; every note needs at least one `[[wikilink]]`.
+- Full operating rules live in `~/brain/AGENTS.md` — read it if you're doing substantial vault work.
