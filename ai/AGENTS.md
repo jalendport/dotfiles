@@ -4,7 +4,7 @@
 - Verify a change actually works before calling it done. Exercise the affected flow; don't declare success from the diff alone.
 - For big features or destructive/irreversible changes, propose the approach and wait for approval before building. Small, reversible changes: just do them.
 - Never commit unless asked. When asked, follow the commit conventions below.
-- My conventions live in my knowledge vault at `~/brain` (read its `AGENTS.md` for how to use it) — they cover **both code and docs/prose**. Before writing code, check `~/brain/conventions/<topic>/` for the stack in play; before writing markdown, READMEs, or any documentation, check `~/brain/conventions/general/` (e.g. never hard-wrap markdown prose). Pass the relevant conventions along when delegating writing to subagents.
+- My conventions live in my knowledge vault at `~/brain` — check it before writing code or prose. See "Second brain vault" below.
 
 # Commit messages
 
@@ -32,6 +32,7 @@ If I'm committing by hand with no agent involved, omit the trailer entirely.
 I keep a git-synced Obsidian knowledge base at `/Users/jalendport/brain`. It's the *cold store* of my decisions, coding conventions, and curated best-practice notes (my Claude memory system is the always-loaded *hot cache* that links into it).
 
 - **When a coding task touches my preferences, a past decision, or a language/framework I keep conventions for, read the vault first**: start with `~/brain/Home.md` (the index), then the relevant `~/brain/conventions/<topic>/` and `~/brain/decisions/` notes. Use grep/glob over `~/brain`.
+- **Conventions cover both code and docs/prose.** Before writing markdown, READMEs, or any documentation, check `~/brain/conventions/general/` (e.g. never hard-wrap markdown prose). Pass the relevant conventions along when delegating writing to subagents.
 - **Honor the tag contract** defined in `~/brain/AGENTS.md`: `status: best-practice` = prefer over your defaults; `status: adopted` conventions = how I want code written; `source: twitter` without `best-practice` = unverified lead; `status: draft`/`experimental`/`deprecated` = don't apply silently.
 - **Writing to the vault**: you may draft notes (set `author: claude`, `status: draft`, use `~/brain/templates/`). `~/brain` auto-syncs (obsidian-git commits + pushes every ~10 min), so you don't manage git at all — just write the file. The approval gate is the **`status` field, not git**: everything you write stays `status: draft` and unreviewed until I promote it (I work a `~/brain/Review.md` queue). **Never promote your own notes** to `accepted`/`adopted`/`best-practice` — that's my call. Grep before creating to avoid duplicates; every note needs at least one `[[wikilink]]`.
 - Full operating rules live in `~/brain/AGENTS.md` — read it if you're doing substantial vault work.
