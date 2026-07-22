@@ -1,3 +1,11 @@
+# Working rules
+
+- Match existing patterns before inventing new ones — the naming, file structure, styling utilities, and idioms already in the codebase win by default.
+- Verify a change actually works before calling it done. Exercise the affected flow; don't declare success from the diff alone.
+- For big features or destructive/irreversible changes, propose the approach and wait for approval before building. Small, reversible changes: just do them.
+- Never commit unless asked. When asked, follow the commit conventions below.
+- My conventions live in my knowledge vault at `~/brain` (read its `AGENTS.md` for how to use it) — they cover **both code and docs/prose**. Before writing code, check `~/brain/conventions/<topic>/` for the stack in play; before writing markdown, READMEs, or any documentation, check `~/brain/conventions/general/` (e.g. never hard-wrap markdown prose). Pass the relevant conventions along when delegating writing to subagents.
+
 # Commit messages
 
 Write a single-line git commit message following these conventions:
