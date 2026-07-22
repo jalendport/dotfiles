@@ -1,0 +1,143 @@
+# Starship prompt config.
+# Colors are 256-color palette indices (fg:NN). Known engine limitations:
+#   - No instant prompt; the prompt renders synchronously each time.
+#   - Git status is computed per prompt (see command_timeout below), so very
+#     large repos can lag briefly.
+
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Blank line before each prompt.
+add_newline = true
+
+# Give git status room to compute on big repos instead of blanking.
+command_timeout = 1000
+
+# Two-line layout: frame + dir + git on the left, a right-aligned status stack
+# pushed out with a dotted fill, and the prompt char on the second line.
+format = """
+[╭─](fg:238)$directory$git_branch$git_status$fill$status$cmd_duration$jobs$direnv$nodejs$python$ruby$golang$rust$java$php$kubernetes$terraform$aws$gcloud$docker_context$time
+[╰─](fg:238)$character """
+
+# Dotted separator filling the gap between the left and right segments.
+[fill]
+symbol = '·'
+style = 'fg:238'
+
+# Prompt char: green ❯ on success, red ❯ on error; ❮ in vi command mode.
+[character]
+success_symbol = '[❯](fg:76)'
+error_symbol = '[❯](fg:196)'
+vimcmd_symbol = '[❮](fg:76)'
+
+# Directory: teal, full path with no truncation.
+[directory]
+style = 'fg:31'
+home_symbol = '~'
+truncation_length = 0
+truncate_to_repo = false
+read_only = ' '
+read_only_style = 'fg:31'
+
+# Branch: no icon, green.
+[git_branch]
+symbol = ''
+style = 'fg:76'
+format = '[$branch]($style)'
+
+# Git counters: clean/ahead-behind/stash green (76), staged/modified yellow (178),
+# untracked blue (39), conflicts red (196). Leading spaces separate each group.
+[git_status]
+style = 'fg:76'
+format = '[$ahead_behind$stashed$conflicted$staged$modified$untracked]($style)'
+ahead = ' [⇡$count](fg:76)'
+behind = ' [⇣$count](fg:76)'
+diverged = ' [⇣$behind_count⇡$ahead_count](fg:76)'
+stashed = ' [*$count](fg:76)'
+conflicted = ' [~$count](fg:196)'
+staged = ' [+$count](fg:178)'
+modified = ' [!$count](fg:178)'
+untracked = ' [?$count](fg:39)'
+
+# Exit code: hidden on success, shown in red on failure.
+[status]
+disabled = false
+style = 'fg:160'
+symbol = ''
+format = ' [$status]($style)'
+
+# Command duration: shown for commands over 3s, grey.
+[cmd_duration]
+min_time = 3000
+style = 'fg:101'
+format = ' [$duration]($style)'
+
+# Background jobs: ≡ icon, green (count shown once there are 2+).
+[jobs]
+style = 'fg:70'
+symbol = '≡'
+format = ' [$symbol$number]($style)'
+symbol_threshold = 1
+number_threshold = 2
+
+# Clock: 12-hour, teal-grey.
+[time]
+disabled = false
+style = 'fg:66'
+format = ' [$time]($style)'
+time_format = '%I:%M:%S %p'
+
+# --- Right-side dev-context segments -----------------------------------------
+# Each only renders in a relevant directory.
+[direnv]
+disabled = false
+style = 'fg:178'
+format = ' [$symbol$loaded/$allowed]($style)'
+
+[nodejs]
+style = 'fg:70'
+format = ' [$symbol($version)]($style)'
+
+[python]
+style = 'fg:66'
+format = ' [$symbol($version)(($virtualenv))]($style)'
+
+[ruby]
+style = 'fg:160'
+format = ' [$symbol($version)]($style)'
+
+[golang]
+style = 'fg:38'
+format = ' [$symbol($version)]($style)'
+
+[rust]
+style = 'fg:166'
+format = ' [$symbol($version)]($style)'
+
+[java]
+style = 'fg:32'
+format = ' [$symbol($version)]($style)'
+
+[php]
+style = 'fg:99'
+format = ' [$symbol($version)]($style)'
+
+[kubernetes]
+disabled = false
+style = 'fg:32'
+format = ' [$symbol$context( ($namespace))]($style)'
+
+[terraform]
+style = 'fg:105'
+format = ' [$symbol$workspace]($style)'
+
+[aws]
+style = 'fg:208'
+format = ' [$symbol($profile)(($region))]($style)'
+
+[gcloud]
+style = 'fg:32'
+format = ' [$symbol$account(@$domain)(($project))]($style)'
+
+[docker_context]
+style = 'fg:38'
+format = ' [$symbol$context]($style)'
