@@ -53,15 +53,31 @@
       "Bash(docker images *)",
       "Bash(brew list *)",
       "Bash(brew info *)",
-      "Bash(counselors:*)"
+      "Bash(counselors:*)",
+      "mcp__solo__*"
+    ],
+    "deny": [
+      "NotebookEdit",
+      "CronCreate",
+      "CronDelete",
+      "CronList",
+      "PushNotification",
+      "RemoteTrigger",
+      "DesignSync"
     ]
   },
+  "model": "claude-fable-5[1m]",
+  "disableClaudeAiConnectors": true,
+  "disableRemoteControl": true,
+  "disableWorkflows": true,
+  "disableArtifact": true,
   "statusLine": {
     "type": "command",
     "command": "bash ~/.claude/statusline.sh"
   },
   "effortLevel": "high",
   "tui": "fullscreen",
+  "skipDangerousModePermissionPrompt": true,
   "theme": "auto",
   "skipAutoPermissionPrompt": true
 }
