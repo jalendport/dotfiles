@@ -5,9 +5,9 @@
 #       the "#" would be read as part of the value. Keep comments on their own line.
 
 # ── Theme ──────────────────────────────────────────────────────────
-# Dark, spacey palette. Browse all built-ins with: ghostty +list-themes
-# Tip: use `theme = light:<name>,dark:<name>` to auto-switch with macOS.
-theme = Spacedust
+# Browse all built-ins with: ghostty +list-themes
+# Auto-switches with macOS appearance.
+theme = light:Ayu Light,dark:Ayu
 
 # ── Font ───────────────────────────────────────────────────────────
 # Ghostty bundles JetBrains Mono (Nerd Font icons included) — no install needed.
