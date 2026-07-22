@@ -1,8 +1,24 @@
-# Starship prompt config.
-# Colors are 256-color palette indices (fg:NN). Known engine limitations:
-#   - No instant prompt; the prompt renders synchronously each time.
-#   - Git status is computed per prompt (see command_timeout below), so very
-#     large repos can lag briefly.
+# Starship prompt config — powerline "rainbow" style.
+#
+# COLORS: the 16 named ANSI colors (red, yellow, green, blue, cyan, bright-black)
+# instead of a hardcoded palette. The terminal resolves them from its active
+# theme, so this prompt tracks whatever Ghostty theme is set. Under Spacedust:
+#   red    → #e35b00 (orange)    yellow → #e3cd7b (sand)   green → #5cab96 (teal)
+#   blue   → #0f548b (deep blue) cyan   → #06afc7 (cyan)   bright-black → #684c31
+# Switch Ghostty themes and the prompt recolors itself — no edits here.
+#
+# GLYPHS: powerline dividers and icons are written as explicit \uXXXX escapes so
+# the exact codepoint is guaranteed (pasted glyphs can silently corrupt into
+# look-alikes like the box-drawing "|", which renders as a tacky straight line).
+# Escapes only decode inside "double-quoted" strings, not 'literal' ones.
+# Requires a Nerd Font; Ghostty ships JetBrains Mono NF.
+#    = rounded left cap    = chevron divider    = rounded right cap
+#    = git branch    = apple    = lock    = clock
+#
+# Rainbow order (each segment a chevron apart):
+#   os(orange) › directory(sand) › git(teal) › languages(blue) › tools(cyan) › time(grey)
+# Language/tool segments are auto-contextual — each only appears in a matching
+# project, so a plain dir just shows os › directory › git › time.
 
 "$schema" = 'https://starship.rs/config-schema.json'
 
@@ -12,132 +28,123 @@ add_newline = true
 # Give git status room to compute on big repos instead of blanking.
 command_timeout = 1000
 
-# Two-line layout: frame + dir + git on the left, a right-aligned status stack
-# pushed out with a dotted fill, and the prompt char on the second line.
+# One continuous powerline: rounded cap, chevron-separated segments, rounded cap,
+# then the prompt char drops to a second line.
 format = """
-[╭─](fg:238)$directory$git_branch$git_status$fill$status$cmd_duration$jobs$direnv$nodejs$python$ruby$golang$rust$java$php$kubernetes$terraform$aws$gcloud$docker_context$time
-[╰─](fg:238)$character """
+[](fg:red)\
+$os\
+[](fg:red bg:yellow)\
+$directory\
+[](fg:yellow bg:green)\
+$git_branch\
+$git_status\
+[](fg:green bg:blue)\
+$python\
+$rust\
+$golang\
+$ruby\
+$php\
+$lua\
+[](fg:blue bg:cyan)\
+$docker_context\
+$terraform\
+$direnv\
+[](fg:cyan bg:bright-black)\
+$cmd_duration\
+$time\
+[](fg:bright-black)\
+$line_break$character"""
 
-# Dotted separator filling the gap between the left and right segments.
-[fill]
-symbol = '·'
-style = 'fg:238'
+# OS: apple on orange. Only the current OS's symbol ever renders (no Windows/etc.).
+[os]
+disabled = false
+style = 'fg:bright-white bg:red'
+format = '[ $symbol ]($style)'
 
-# Prompt char: green ❯ on success, red ❯ on error; ❮ in vi command mode.
-[character]
-success_symbol = '[❯](fg:76)'
-error_symbol = '[❯](fg:196)'
-vimcmd_symbol = '[❮](fg:76)'
+[os.symbols]
+Macos = ""
 
-# Directory: teal, full path with no truncation.
+# Directory: dark text on sand, compact 3-segment truncation, icons for common dirs.
 [directory]
-style = 'fg:31'
-home_symbol = '~'
-truncation_length = 0
-truncate_to_repo = false
-read_only = ' '
-read_only_style = 'fg:31'
+style = 'fg:black bg:yellow'
+format = '[ $path$read_only ]($style)'
+truncation_length = 3
+truncation_symbol = '…/'
+read_only = " "
 
-# Branch: no icon, green.
+[directory.substitutions]
+"Developer" = " "
+"Documents" = " "
+"Downloads" = " "
+"Desktop" = " "
+
+# Branch: powerline branch icon, dark text on teal.
 [git_branch]
-symbol = ''
-style = 'fg:76'
-format = '[$branch]($style)'
+symbol = " "
+style = 'fg:black bg:green'
+format = '[ $symbol$branch ]($style)'
 
-# Git counters: clean/ahead-behind/stash green (76), staged/modified yellow (178),
-# untracked blue (39), conflicts red (196). Leading spaces separate each group.
+# Git status: same teal segment, compact counters.
 [git_status]
-style = 'fg:76'
-format = '[$ahead_behind$stashed$conflicted$staged$modified$untracked]($style)'
-ahead = ' [⇡$count](fg:76)'
-behind = ' [⇣$count](fg:76)'
-diverged = ' [⇣$behind_count⇡$ahead_count](fg:76)'
-stashed = ' [*$count](fg:76)'
-conflicted = ' [~$count](fg:196)'
-staged = ' [+$count](fg:178)'
-modified = ' [!$count](fg:178)'
-untracked = ' [?$count](fg:39)'
+style = 'fg:black bg:green'
+format = '[$all_status$ahead_behind ]($style)'
 
-# Exit code: hidden on success, shown in red on failure.
-[status]
-disabled = false
-style = 'fg:160'
-symbol = ''
-format = ' [$status]($style)'
-
-# Command duration: shown for commands over 3s, grey.
-[cmd_duration]
-min_time = 3000
-style = 'fg:101'
-format = ' [$duration]($style)'
-
-# Background jobs: ≡ icon, green (count shown once there are 2+).
-[jobs]
-style = 'fg:70'
-symbol = '≡'
-format = ' [$symbol$number]($style)'
-symbol_threshold = 1
-number_threshold = 2
-
-# Clock: 12-hour, teal-grey.
-[time]
-disabled = false
-style = 'fg:66'
-format = ' [$time]($style)'
-time_format = '%I:%M:%S %p'
-
-# --- Right-side dev-context segments -----------------------------------------
-# Each only renders in a relevant directory.
-[direnv]
-disabled = false
-style = 'fg:178'
-format = ' [$symbol$loaded/$allowed]($style)'
-
-[nodejs]
-style = 'fg:70'
-format = ' [$symbol($version)]($style)'
-
+# --- Language segments (blue). Each only renders in a matching project. --------
+# Symbols are Starship's Nerd Font defaults. Add/remove modules freely.
 [python]
-style = 'fg:66'
-format = ' [$symbol($version)(($virtualenv))]($style)'
-
-[ruby]
-style = 'fg:160'
-format = ' [$symbol($version)]($style)'
-
-[golang]
-style = 'fg:38'
-format = ' [$symbol($version)]($style)'
+style = 'fg:bright-white bg:blue'
+format = '[ $symbol( $version) ]($style)'
 
 [rust]
-style = 'fg:166'
-format = ' [$symbol($version)]($style)'
+style = 'fg:bright-white bg:blue'
+format = '[ $symbol( $version) ]($style)'
 
-[java]
-style = 'fg:32'
-format = ' [$symbol($version)]($style)'
+[golang]
+style = 'fg:bright-white bg:blue'
+format = '[ $symbol( $version) ]($style)'
+
+[ruby]
+style = 'fg:bright-white bg:blue'
+format = '[ $symbol( $version) ]($style)'
 
 [php]
-style = 'fg:99'
-format = ' [$symbol($version)]($style)'
+style = 'fg:bright-white bg:blue'
+format = '[ $symbol( $version) ]($style)'
 
-[kubernetes]
-disabled = false
-style = 'fg:32'
-format = ' [$symbol$context( ($namespace))]($style)'
+[lua]
+style = 'fg:bright-white bg:blue'
+format = '[ $symbol( $version) ]($style)'
+
+# --- Tooling segments (cyan). Each only renders when relevant. -----------------
+[docker_context]
+style = 'fg:black bg:cyan'
+format = '[ $symbol( $context) ]($style)'
 
 [terraform]
-style = 'fg:105'
-format = ' [$symbol$workspace]($style)'
+style = 'fg:black bg:cyan'
+format = '[ $symbol( $workspace) ]($style)'
 
-[aws]
-style = 'fg:208'
-format = ' [$symbol($profile)(($region))]($style)'
+[direnv]
+disabled = false
+style = 'fg:black bg:cyan'
+format = '[ $symbol$loaded/$allowed ]($style)'
 
-[gcloud]
-style = 'fg:32'
-format = ' [$symbol$account(@$domain)(($project))]($style)'
+# --- Grey tail segment --------------------------------------------------------
+# Command duration: only for commands over 3s.
+[cmd_duration]
+min_time = 3000
+style = 'fg:bright-white bg:bright-black'
+format = '[ $duration ]($style)'
 
-[docker_context]
-style = 'fg:38'
-format = ' [$symbol$context]($style)'
+# Clock: 24-hour, closes out the grey segment.
+[time]
+disabled = false
+time_format = '%R'
+style = 'fg:bright-white bg:bright-black'
+format = "[  $time ]($style)"
+
+# Prompt char on line two: green ❯ on success, red ❯ on error; ❮ in vi command mode.
+[character]
+success_symbol = '[❯](bold fg:green)'
+error_symbol = '[❯](bold fg:red)'
+vimcmd_symbol = '[❮](bold fg:green)'
