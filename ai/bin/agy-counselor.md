@@ -33,6 +33,44 @@ printmode.go:280] Print mode: timed out after 2984 polls (printed=57)
 The error string comes from **agy itself**, not counselors. Re-running the *same* prompt sometimes finished
 in <2 min with a full review — it's nondeterministic, which is why Pro looked "sometimes broken".
 
+## A third failure mode the wrapper canNOT fix: headless permission denials (agy ≥ 1.1.3)
+
+**Symptom (2026-07-20, agy 1.1.4):** every agy counselor — Flash included — returns nothing (or only a
+one-line `jetski: no output produced — a tool required the "…" permission…` stderr notice). Runs end in
+seconds. The agy log fingerprint is:
+
+```
+tool_confirmation_manager.go:183] Print mode: soft-denying tool confirmation "ReadFile" at step N
+```
+
+**Cause:** agy 1.1.3 changed headless (`-p`) behavior — tools that need a permission confirmation are now
+**soft-denied** instead of auto-approved ("Fixed headless (`-p`) runs hanging or silently auto-approving
+tools…" in `agy changelog`). The model can't read files or run commands, so it produces no review.
+
+**Fix:** allow-rules in `~/.gemini/antigravity-cli/settings.json` (a live file, not dotfiles-managed)
+under `permissions.allow`. Rules are `<permission>(<target>)`; `read_file(*)` covers reads, and
+`command(<argv-prefix>)` matches a command whose argv starts with the target (`command(git log)` matches
+`git log --oneline -2`; bare `command(git)` matches any git command — kept scoped to read-only
+subcommands instead). The deliberately read-only allowlist as of 2026-07-20: `read_file(*)` plus
+`cat ls head tail grep rg find wc pwd echo which diff tree sort uniq cut basename dirname file stat
+realpath` and `git log/diff/show/status/branch`. If a future counselor run dies with a new
+`a tool required the "X" permission` notice, add the rule the notice names.
+
+Note these rules also auto-approve those tools in **interactive** agy sessions — that's why the git rules
+are scoped (a bare `command(git)` would silently allow `git push`).
+
+**Two extra findings from re-testing raw agy 1.1.4 without the wrapper (2026-07-20, 2× Pro Low on a real
+heavy review prompt):**
+
+- **A single denied tool call aborts the whole print-mode run** — no partial output, exit 0. One run did
+  17 steps of review work, tried `pnpm build && pnpm lint && pnpm test` (rightly not allowlisted), and
+  died with empty stdout. The denial is not fed back to the model as a recoverable error. Hence the
+  steering now explicitly forbids builds/tests/state-changing commands.
+- **Artifacts bypass the permission regime.** The other run finished cleanly but wrote the full review to
+  an internal artifact (`~/.gemini/antigravity-cli/brain/<id>/review.md`) and printed only a ~165-word
+  teaser + pointer. Artifact writes are not workspace file-writes, so `permissions.allow` cannot block
+  them — original failure mode 1 is alive in 1.1.4 and only the steering prevents it.
+
 ## What the wrapper does
 
 On runs that include `-p`/`--print`/`--prompt`, it appends a `CRITICAL OUTPUT REQUIREMENTS` block to the

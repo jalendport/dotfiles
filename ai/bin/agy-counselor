@@ -15,7 +15,8 @@ STEERING='
 
 CRITICAL OUTPUT REQUIREMENTS (you are running non-interactively; your chat reply is the ONLY output anyone will ever see):
 - Write your COMPLETE final answer directly in your chat response.
-- Do NOT write your answer or any notes to a file. Do NOT create, modify, or delete any files. You have read-only intent.
+- Do NOT write your answer or any notes to a file OR an artifact. Do NOT create, modify, or delete any files. You have read-only intent.
+- Do NOT run builds, tests, installs, or any state-changing shell commands (e.g. pnpm/npm/make, git commit/push). Tool permission requests are auto-denied in this session, and a single denial ABORTS the session with no output at all. Stick to reading files and simple read-only commands (cat, ls, grep/rg, find, git log/diff/show/status).
 - Budget your time: this session has a hard wall-clock timeout. Read what you need efficiently, then commit to producing the full final answer well before the limit. A complete answer now beats a perfect answer that never arrives.'
 
 # Only steer real print-mode runs; pass through --version/--help/subcommands
