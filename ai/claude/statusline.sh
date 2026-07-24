@@ -1,11 +1,11 @@
 #!/bin/bash
 # Claude Code status line. Receives session JSON on stdin.
-# Shows: dir | git/worktree | model | live context vs 100K "smart zone"
+# Shows: dir | git/worktree | model | live context vs 150K "smart zone"
 #        (finance.biggo.com/news/e7209c094224b09c)
 #        | real subscription usage: 5h session + 7d weekly (% used + reset countdown).
 input=$(cat)
 
-LIMIT=100000
+LIMIT=150000
 now=$(date +%s)
 ansi_reset=$'\033[0m'
 
@@ -43,7 +43,7 @@ if branch=$(git -C "$cwd" rev-parse --abbrev-ref HEAD 2>/dev/null); then
   git_seg=" | ${marker}${branch}"
 fi
 
-# --- Context tokens: latest turn's full input + output, vs 100K smart zone -----
+# --- Context tokens: latest turn's full input + output, vs 150K smart zone -----
 used=0
 if [ -f "$transcript" ]; then
   used=$(tail -r "$transcript" 2>/dev/null | while IFS= read -r line; do
@@ -86,7 +86,7 @@ if [ -n "$week_pct" ]; then
   usage_seg="${usage_seg} · 7d ${c}${p}%${ansi_reset} ($(countdown $(( ${week_reset%.*} - now ))))"
 fi
 
-tokens_seg=" | ${ctx_color}${usedk}K/100K tokens (${pct}%)${ansi_reset}"
+tokens_seg=" | ${ctx_color}${usedk}K/150K tokens (${pct}%)${ansi_reset}"
 
 printf '%s%s | %s%s%s' \
   "$dir" "$git_seg" "$model_name" \
