@@ -15,7 +15,7 @@ command_timeout = 1000
 # Two-line layout: frame + dir + git on the left, a right-aligned status stack
 # pushed out with a dotted fill, and the prompt char on the second line.
 format = """
-[╭─](fg:238)$username$hostname$directory$git_branch$git_commit$git_status$git_state$fill$status$cmd_duration$jobs$direnv$nodejs$python$ruby$golang$rust$java$php$kubernetes$terraform$aws$gcloud$docker_context$time
+[╭─](fg:238)$username$hostname$directory${custom.worktree}$git_branch$git_commit$git_status$git_state$fill$status$cmd_duration$jobs$direnv${custom.spark}$time
 [╰─](fg:238)$character """
 
 # Dotted separator filling the gap between the left and right segments.
@@ -48,6 +48,15 @@ truncation_length = 0
 truncate_to_repo = false
 read_only = ' '
 read_only_style = 'fg:31'
+
+# Linked-worktree marker: dim ⊕ before the branch when cwd is inside a git
+# worktree (a .git *file* whose gitdir points into .git/worktrees/ — the
+# gitdir check keeps submodules, which also use .git files, from matching).
+[custom.worktree]
+when = 'd="$PWD"; while :; do if [ -e "$d/.git" ]; then [ -f "$d/.git" ] && grep -q "/worktrees/" "$d/.git" && exit 0; exit 1; fi; [ "$d" = "/" ] && exit 1; d="${d%/*}"; d="${d:-/}"; done'
+shell = ['sh']
+style = 'fg:246'
+format = '[⊕]($style) '
 
 # Branch: no icon, green. Detached HEAD reports a literal "HEAD" branch;
 # suppress it so git_commit's hash shows alone.
@@ -109,58 +118,18 @@ style = 'fg:66'
 format = ' [$time]($style)'
 time_format = '%I:%M %p'
 
-# --- Right-side dev-context segments -----------------------------------------
-# Each only renders in a relevant directory.
+# direnv: only renders in directories with an .envrc.
 [direnv]
 disabled = false
 style = 'fg:178'
 format = ' [$symbol$loaded/$allowed]($style)'
 
-[nodejs]
-style = 'fg:70'
-format = ' [$symbol($version)]($style)'
-
-[python]
-style = 'fg:66'
-format = ' [$symbol($version)( \($virtualenv\))]($style)'
-
-[ruby]
-style = 'fg:160'
-format = ' [$symbol($version)]($style)'
-
-[golang]
-style = 'fg:38'
-format = ' [$symbol($version)]($style)'
-
-[rust]
-style = 'fg:166'
-format = ' [$symbol($version)]($style)'
-
-[java]
-style = 'fg:32'
-format = ' [$symbol($version)]($style)'
-
-[php]
-style = 'fg:99'
-format = ' [$symbol($version)]($style)'
-
-[kubernetes]
-disabled = false
-style = 'fg:32'
-format = ' [$symbol$context( ($namespace))]($style)'
-
-[terraform]
-style = 'fg:105'
-format = ' [$symbol$workspace]($style)'
-
-[aws]
-style = 'fg:208'
-format = ' [$symbol($profile)( \($region\))]($style)'
-
-[gcloud]
-style = 'fg:32'
-format = ' [$symbol$account(@$domain)( \($project\))]($style)'
-
-[docker_context]
-style = 'fg:38'
-format = ' [$symbol$context]($style)'
+# Spark project marker: shown when a spark.yml governs the cwd. Walks up the
+# tree like spark-cli's own manifest.FindRoot (built-in detect_files can't
+# check parent directories).
+[custom.spark]
+when = 'd="$PWD"; while :; do [ -f "$d/spark.yml" ] && exit 0; [ "$d" = "/" ] && exit 1; d="${d%/*}"; d="${d:-/}"; done'
+shell = ['sh']
+symbol = '⚡'
+style = 'fg:220'
+format = ' [$symbol spark]($style)'
