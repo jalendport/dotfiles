@@ -8,7 +8,7 @@ Skills are grouped one level deep by category:
 
 ```
 ai/skills/
-└── <category>/           # brain | writing | workflow | craftcms
+└── <category>/           # brain | writing | workflow | dev
     └── <skill-name>/
         ├── SKILL.md      # required: YAML frontmatter (name, description) + body
         ├── agents/
@@ -20,7 +20,7 @@ ai/skills/
 - **brain** - the `~/brain` vault (retrieval, capture)
 - **writing** - prose in my voice
 - **workflow** - process skills (planning, releases, reviews)
-- **craftcms** - Craft CMS-specific tooling
+- **dev** - development tooling (Craft CMS, PHP, and friends)
 
 ## How linking works
 
