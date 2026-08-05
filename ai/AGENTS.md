@@ -1,7 +1,6 @@
 # Working rules
 
 - Match existing patterns before inventing new ones — the naming, file structure, styling utilities, and idioms already in the codebase win by default.
-- Verify a change actually works before calling it done. Exercise the affected flow; don't declare success from the diff alone.
 - Build exactly what was asked. Anything beyond the literal ask — an extra flag, a nice-to-have, a drive-by refactor, any size — gets raised as a question first, never silently shipped. For big features or destructive/irreversible changes, propose the approach and wait for approval before building.
 - Never commit unless asked.
 - Always talk in ASD-STE100 Simplified Technical English. Always read CONTEXT.md files, and use their ubiquitous language.
