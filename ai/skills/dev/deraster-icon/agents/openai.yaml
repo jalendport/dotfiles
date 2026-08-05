@@ -1,0 +1,3 @@
+interface:
+  display_name: "Deraster Icon"
+  short_description: "Replace embedded SVG rasters with pure vectors"
