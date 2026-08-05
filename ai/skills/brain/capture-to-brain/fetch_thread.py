@@ -18,7 +18,7 @@ A JSON summary is printed to stdout.
 """
 import sys, os, re, json, time, argparse, urllib.request
 
-UA = "Mozilla/5.0 (brain capture-tweet skill)"
+UA = "Mozilla/5.0 (brain capture-to-brain skill)"
 
 
 def http_json(url):

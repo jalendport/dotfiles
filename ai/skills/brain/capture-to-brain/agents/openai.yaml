@@ -1,0 +1,3 @@
+interface:
+  display_name: "Capture to Brain"
+  short_description: "Save decisions, lessons, and tweets to the brain vault"
