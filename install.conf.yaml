@@ -60,7 +60,10 @@
         # preserving each tool's built-ins
         find "$src" -mindepth 2 -maxdepth 3 -name SKILL.md 2>/dev/null | while IFS= read -r file; do
           skill="$(dirname "$file")"
-          ln -sfn "$skill" "$dir/$(basename "$skill")"
+          target="$dir/$(basename "$skill")"
+          # a real dir here would swallow the symlink (ln -sfn puts it inside); the repo wins
+          [ -e "$target" ] && [ ! -L "$target" ] && rm -rf "$target"
+          ln -sfn "$skill" "$target"
         done
       done
       true
