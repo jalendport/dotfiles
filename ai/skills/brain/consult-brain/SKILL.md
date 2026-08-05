@@ -1,11 +1,11 @@
 ---
 name: consult-brain
-description: Consult Jalen's ~/brain vault — his conventions, decisions, and captured knowledge. Use before writing nontrivial code or prose in his stacks (Craft CMS, Laravel, PHP, Twig, Vue, Tailwind, git), when asked "how do I usually do X" or "what did I decide about X", or when the user mentions the brain/vault.
+description: Consult the user's ~/brain vault — their conventions, decisions, and captured knowledge. Use before writing nontrivial code or prose in their stacks (Craft CMS, Laravel, PHP, Twig, Vue, Tailwind, git), when asked "how do I usually do X" or "what did I decide about X", or when the user mentions the brain/vault.
 ---
 
 # Consult brain
 
-`~/brain` is Jalen's git-synced knowledge base — `conventions/`, `decisions/`, `reference/`, `knowledge/`. The operating contract (status weighting, write rules, frontmatter, don'ts) lives in `~/brain/AGENTS.md`; this skill is the retrieval procedure only.
+`~/brain` is the user's git-synced knowledge base — `conventions/`, `decisions/`, `reference/`, `knowledge/`. The operating contract (status weighting, write rules, frontmatter, don'ts) lives in `~/brain/AGENTS.md`; this skill is the retrieval procedure only.
 
 1. Read `~/brain/AGENTS.md` (the contract) and `~/brain/Home.md` (the map).
 2. Grep/glob the topic in play — e.g. `Grep(pattern: "twig", path: "~/brain/conventions", -il)`; check `decisions/` too when the question is "why is it this way".
