@@ -1,0 +1,3 @@
+interface:
+  display_name: "Cut Release"
+  short_description: "Tag and push a release the repo's own way"
