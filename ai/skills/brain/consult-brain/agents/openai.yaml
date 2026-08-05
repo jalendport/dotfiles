@@ -1,0 +1,3 @@
+interface:
+  display_name: "Consult Brain"
+  short_description: "Look up the user's conventions and decisions"

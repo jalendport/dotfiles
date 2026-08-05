@@ -37,9 +37,6 @@
     ~/.claude/commands:
       path: ai/claude/commands
       create: true
-    ~/.claude/skills:
-      path: ai/skills
-      create: true
 
 - shell:
   - command: git config --global core.excludesfile ~/.gitignore
@@ -50,17 +47,21 @@
     description: Configure Codex context status line
   - command: |
       src="$PWD/ai/skills"
-      for dir in "$HOME/.codex/skills" "$HOME/.gemini/antigravity-cli/skills"; do
+      for dir in "$HOME/.claude/skills" "$HOME/.codex/skills" "$HOME/.gemini/antigravity-cli/skills"; do
+        # the mirror itself may be a legacy whole-directory symlink; replace with a real dir
+        [ -L "$dir" ] && rm -f "$dir"
         mkdir -p "$dir" || continue
         # prune dangling skill symlinks (e.g. a skill deleted from the repo)
         ls -1 "$dir" 2>/dev/null | while IFS= read -r name; do
           link="$dir/$name"
           [ -L "$link" ] && [ ! -e "$link" ] && rm -f "$link"
         done
-        # link every skill folder from the repo, preserving each tool's built-ins
-        ls -1 "$src" 2>/dev/null | while IFS= read -r name; do
-          [ -d "$src/$name" ] && ln -sfn "$src/$name" "$dir/$name"
+        # link every skill (any dir with a SKILL.md, flat or one category level deep),
+        # preserving each tool's built-ins
+        find "$src" -mindepth 2 -maxdepth 3 -name SKILL.md 2>/dev/null | while IFS= read -r file; do
+          skill="$(dirname "$file")"
+          ln -sfn "$skill" "$dir/$(basename "$skill")"
         done
       done
       true
-    description: Link shared skills into Codex and agy (Antigravity)
+    description: Link shared skills into Claude, Codex, and agy (Antigravity)
