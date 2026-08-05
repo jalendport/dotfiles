@@ -3,7 +3,7 @@ name: cut-release
 description: Cut a tagged release for the current project — pull latest, verify what's pending, finalize the version bump + changelog, merge to the release branch, tag, and push. Use when the user says "cut a release", "cut X.Y.Z", "release", "tag X.Y.Z", "bump the version", or "push and tag". Auto-detects git-flow vs. trunk and where the version number lives.
 ---
 
-Cut a release the way the user already does it by hand. **Never invent the process — detect it from the repo, then mirror the last release exactly.** Follow the git convention in `~/brain/conventions/git/` and the commit-message rules in the global `AGENTS.md`.
+Cut a release the way the user already does it by hand. **Never invent the process — detect it from the repo, then mirror the last release exactly.** Follow the git conventions in `~/brain/conventions/git/`, including the commit-message note.
 
 ## 0. Preconditions
 - Confirm the target version if not given (`X.Y.Z`, semver). If the user just says "cut a release," infer the bump from the pending changes and propose it.
