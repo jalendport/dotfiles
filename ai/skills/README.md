@@ -20,7 +20,7 @@ ai/skills/
 - **brain** - the `~/brain` vault (retrieval, capture)
 - **writing** - prose in my voice
 - **workflow** - process skills (planning, releases, reviews)
-- **dev** - development tooling (Craft CMS, PHP, and friends)
+- **dev** - development skills and tooling (code-shaped work: TDD, review, debugging, design)
 
 ## How linking works
 

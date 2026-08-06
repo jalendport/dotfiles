@@ -1,0 +1,5 @@
+interface:
+  display_name: "Create Todos"
+  short_description: "Split a plan into tracer-bullet todos"
+policy:
+  allow_implicit_invocation: false

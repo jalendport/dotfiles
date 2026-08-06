@@ -1,0 +1,3 @@
+interface:
+  display_name: "Track Work"
+  short_description: "Tracker convention: Solo first, .agents/ files fallback"
