@@ -1,0 +1,2 @@
+# Codex grunt lane: clearly defined implementation. Model inherits config.toml.
+model_reasoning_effort = "medium"

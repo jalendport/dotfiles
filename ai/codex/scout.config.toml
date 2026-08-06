@@ -1,0 +1,2 @@
+# Codex scout lane: reading and fact-finding. Model inherits config.toml.
+model_reasoning_effort = "low"

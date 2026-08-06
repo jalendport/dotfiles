@@ -8,6 +8,5 @@
 
 # Delegation
 
-- The main session (Fable, high effort) keeps planning, judgment, and review. Legwork leaves it: `scout` for read-only sweeps and fact-finding, `grunt` for clearly defined implementation — both pinned to cheap models at medium effort.
-- A task is grunt-ready when its instructions say what done looks like; an open design question stays in the main session.
-- Same rule in Solo: implementation lanes go to cheap runtimes via `spawn_agent`.
+- The main session keeps planning, judgment, and review; legwork leaves it through the lanes in @DELEGATION.md (next to this file) — consult that table before delegating or spawning.
+- A task is delegation-ready when its instructions say what done looks like; an open design question stays in the main session.
