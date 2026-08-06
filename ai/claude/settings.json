@@ -81,6 +81,17 @@
             "statusMessage": "Checking delegation lane"
           }
         ]
+      },
+      {
+        "matcher": "mcp__solo__spawn_agent",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/enforce-solo-lane-model.sh",
+            "timeout": 10,
+            "statusMessage": "Checking Solo lane model"
+          }
+        ]
       }
     ]
   },

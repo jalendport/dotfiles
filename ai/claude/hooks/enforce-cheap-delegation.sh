@@ -13,6 +13,23 @@ case "$subagent" in
   *) exit 0 ;;
 esac
 
+# CLAUDE_CODE_SUBAGENT_MODEL outranks the model param AND agent frontmatter,
+# and its resolution is invisible to this hook — when it forces an expensive
+# model, deny rather than let the lane silently re-route.
+case "${CLAUDE_CODE_SUBAGENT_MODEL:-}" in
+  ""|inherit|haiku|sonnet|claude-haiku-*|claude-sonnet-*) ;;
+  *)
+    jq -n --arg s "$subagent" --arg e "$CLAUDE_CODE_SUBAGENT_MODEL" '{
+      hookSpecificOutput: {
+        hookEventName: "PreToolUse",
+        permissionDecision: "deny",
+        permissionDecisionReason: ("CLAUDE_CODE_SUBAGENT_MODEL is set to \($e), which overrides every agent model pin and would run this \($s) lane on an expensive model. Unset the variable before spawning grunt lanes — it is not part of the dotfiles config.")
+      }
+    }'
+    exit 0
+    ;;
+esac
+
 case "$model" in
   haiku|sonnet|claude-haiku-*|claude-sonnet-*) exit 0 ;;
   "")
