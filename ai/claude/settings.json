@@ -69,6 +69,21 @@
     ],
     "defaultMode": "auto"
   },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Agent",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/enforce-cheap-delegation.sh",
+            "timeout": 10,
+            "statusMessage": "Checking delegation lane"
+          }
+        ]
+      }
+    ]
+  },
   "model": "claude-fable-5[1m]",
   "autoMemoryEnabled": false,
   "disableClaudeAiConnectors": true,
