@@ -34,6 +34,9 @@
     ~/.gemini/antigravity-cli/AGENTS.md:
       path: ai/AGENTS.md
       create: true
+    ~/.grok/AGENTS.md:
+      path: ai/AGENTS.md
+      create: true
     ~/.claude/commands:
       path: ai/claude/commands
       create: true

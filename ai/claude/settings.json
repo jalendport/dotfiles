@@ -69,8 +69,21 @@
     ],
     "defaultMode": "auto"
   },
+  "model": "claude-fable-5-1[1m]",
+  "disableClaudeAiConnectors": true,
   "hooks": {
     "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/enforce-commit-skill.sh",
+            "timeout": 10,
+            "statusMessage": "Checking commit goes through the commit skill"
+          }
+        ]
+      },
       {
         "matcher": "Agent",
         "hooks": [
@@ -92,12 +105,30 @@
             "statusMessage": "Checking Solo lane model"
           }
         ]
+      },
+      {
+        "matcher": "Agent|Task|Bash|Write|Edit|MultiEdit|NotebookEdit|mcp__solo__spawn_agent|mcp__solo__spawn_process",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "maestro hook",
+            "timeout": 660
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "maestro hook",
+            "timeout": 10
+          }
+        ]
       }
     ]
   },
-  "model": "claude-fable-5[1m]",
-  "autoMemoryEnabled": false,
-  "disableClaudeAiConnectors": true,
   "disableRemoteControl": true,
   "disableWorkflows": true,
   "disableArtifact": true,
@@ -105,8 +136,13 @@
     "type": "command",
     "command": "bash ~/.claude/statusline.sh"
   },
+  "enabledPlugins": {
+    "cc-plugin-you-should-know@builtin": true
+  },
+  "extraKnownMarketplaces": {},
   "effortLevel": "high",
   "tui": "fullscreen",
+  "autoMemoryEnabled": false,
   "skipDangerousModePermissionPrompt": true,
   "theme": "auto",
   "skipAutoPermissionPrompt": true
