@@ -43,7 +43,7 @@ Signature constructions (use naturally, don't stack them):
 - "go ahead and…" ("Let's go ahead and open…")
 - "Let me know if…" / "let me know your thoughts!"
 - "Hopefully that helps!" · "Good question!" · "shoot it over" / "shoot me a…"
-- "the long and short of it is…" · "That being said…" · "a tad" · "a bit" · "a ton of" / "a bunch of"
+- "That being said…" · "a tad" · "a bit" · "a ton of" / "a bunch of"
 - "curious" to open discussion or soften disagreement: "I'm curious what you think about…", "curious if…", "just curious to hear other's opinions"
 - Opinion softeners: "I feel like…", "I bet…", "I would say…" — and "just my 2¢ 😄" to close an opinion
 - "super" as the intensifier of choice: "super helpful", "super sorry", "super dynamic"
