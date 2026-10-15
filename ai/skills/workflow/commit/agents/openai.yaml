@@ -1,3 +1,0 @@
-interface:
-  display_name: "Commit"
-  short_description: "Commit pending work per the user's conventions"

@@ -5,6 +5,12 @@
 #        | real subscription usage: 5h session + 7d weekly (% used + reset countdown).
 input=$(cat)
 
+# Feed the subscription windows to Maestro's budget ledger when it is installed;
+# the status line keeps working without it.
+if command -v maestro >/dev/null 2>&1; then
+  { printf '%s' "$input" | maestro budget record claude >/dev/null 2>&1 & }
+fi
+
 LIMIT=150000
 now=$(date +%s)
 ansi_reset=$'\033[0m'

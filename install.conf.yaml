@@ -6,17 +6,11 @@
     ~/.hushlogin:
     ~/.zshrc:
     ~/.zprofile:
-    ~/.config/counselors/config.json:
-      path: ai/counselors-config.json
-      create: true
     ~/.config/ghostty/config:
       path: ghostty/config
       create: true
     ~/.config/starship.toml:
       path: starship/starship.toml
-      create: true
-    ~/.local/bin/agy-counselor:
-      path: ai/bin/agy-counselor
       create: true
     ~/.claude/settings.json:
       path: ai/claude/settings.json
@@ -37,9 +31,6 @@
     ~/.grok/AGENTS.md:
       path: ai/AGENTS.md
       create: true
-    ~/.claude/commands:
-      path: ai/claude/commands
-      create: true
 
 - shell:
   - command: git config --global core.excludesfile ~/.gitignore
@@ -50,7 +41,7 @@
     description: Configure Codex context status line
   - command: |
       src="$PWD/ai/skills"
-      for dir in "$HOME/.claude/skills" "$HOME/.codex/skills" "$HOME/.gemini/antigravity-cli/skills"; do
+      for dir in "$HOME/.claude/skills" "$HOME/.codex/skills" "$HOME/.gemini/antigravity-cli/skills" "$HOME/.agents/skills"; do
         # the mirror itself may be a legacy whole-directory symlink; replace with a real dir
         [ -L "$dir" ] && rm -f "$dir"
         mkdir -p "$dir" || continue
@@ -70,4 +61,4 @@
         done
       done
       true
-    description: Link shared skills into Claude, Codex, and agy (Antigravity)
+    description: Link shared skills into Claude, Codex, agy (Antigravity), and Grok (~/.agents/skills)

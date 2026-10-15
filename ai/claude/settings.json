@@ -53,7 +53,6 @@
       "Bash(docker images *)",
       "Bash(brew list *)",
       "Bash(brew info *)",
-      "Bash(counselors:*)",
       "mcp__solo__*"
     ],
     "deny": [
@@ -81,28 +80,6 @@
             "command": "bash ~/.claude/hooks/enforce-commit-skill.sh",
             "timeout": 10,
             "statusMessage": "Checking commit goes through the commit skill"
-          }
-        ]
-      },
-      {
-        "matcher": "Agent",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash ~/.claude/hooks/enforce-cheap-delegation.sh",
-            "timeout": 10,
-            "statusMessage": "Checking delegation lane"
-          }
-        ]
-      },
-      {
-        "matcher": "mcp__solo__spawn_agent",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash ~/.claude/hooks/enforce-solo-lane-model.sh",
-            "timeout": 10,
-            "statusMessage": "Checking Solo lane model"
           }
         ]
       },

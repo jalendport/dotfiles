@@ -8,5 +8,4 @@
 
 # Delegation
 
-- The main session keeps planning, judgment, and review; legwork leaves it through the lanes in @DELEGATION.md (next to this file) — consult that table before delegating or spawning.
-- A task is delegation-ready when its instructions say what done looks like; an open design question stays in the main session.
+- Hand Tasks to Maestro: `maestro dispatch` for one bounded Task, `maestro run` for an approved Plan, `maestro council` for a review or one question for several minds. Lanes write the code; this session plans, judges, and reads every diff.

@@ -30,7 +30,7 @@ Spend disproportionate effort here. **Be aggressive. Be creative. Refuse to give
 
 Build the right feedback loop, and the bug is 90% fixed.
 
-Loop scripts, fixtures, and captured traces live under `.agents/diagnostics/` (per `/track-work`'s `.agents/` rule) — except a failing test that belongs in the suite, which is repo content.
+Loop scripts, fixtures, and captured traces live under `.agents/diagnostics/` (`.agents/` is globally gitignored, never committed) — except a failing test that belongs in the suite, which is repo content.
 
 ### Tighten the loop
 

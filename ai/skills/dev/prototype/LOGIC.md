@@ -2,7 +2,7 @@
 
 A single, self-contained HTML file — a **shareable demo** — that lets anyone drive a state model by clicking buttons. Use this when the question is about **business logic, state transitions, or data shape** — the kind of thing that looks reasonable on paper but only feels wrong once you push it through real cases.
 
-Because it's one file with nothing to install, you can hand it to a non-developer — a designer, a PM, a domain expert — and let them feel the model for themselves. So it speaks their language, not the code's. Save it as `.agents/prototypes/<name>.html` (per `/track-work`'s `.agents/` rule) — shareable, but never repo content.
+Because it's one file with nothing to install, you can hand it to a non-developer — a designer, a PM, a domain expert — and let them feel the model for themselves. So it speaks their language, not the code's. Save it as `.agents/prototypes/<name>.html` (`.agents/` is globally gitignored) — shareable, but never repo content.
 
 ## When this is the right shape
 
