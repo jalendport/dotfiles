@@ -1,6 +1,6 @@
 # Shared agent skills
 
-Canonical home for [Agent Skills](https://docs.claude.com/en/docs/claude-code/skills) shared across **Claude Code**, **Codex**, **agy** (Antigravity CLI), and **Grok**. All four read the same `SKILL.md` format, so each skill gets authored once here and symlinked into every tool by `dotbot` (see `../../install.conf.yaml`).
+Canonical home for [Agent Skills](https://docs.claude.com/en/docs/claude-code/skills) shared across **Claude Code**, **Codex**, **agy** (Antigravity CLI), and **Grok**. All four read the same `SKILL.md` format, so each skill gets authored once here and symlinked by `dotbot` into three mirrors: `~/.claude/skills`, `~/.gemini/antigravity-cli/skills`, and `~/.agents/skills` (see `../../install.conf.yaml`). Codex and Grok read `~/.agents/skills`.
 
 ## Layout
 
@@ -22,7 +22,7 @@ ai/skills/
 
 ## How linking works
 
-Running `./install` from the repo root symlinks every directory containing a `SKILL.md` into `~/.claude/skills/<name>`, `~/.codex/skills/<name>`, `~/.gemini/antigravity-cli/skills/<name>`, and `~/.agents/skills/<name>` (Grok and Codex read that one), leaving each tool's managed built-ins (e.g. Codex's `.system/`) untouched. The tools only discover skills at the top level of their skills dir, so the mirrors stay flat while this repo stays categorized. Dangling symlinks (from a skill deleted here) get pruned on each run.
+Running `./install` from the repo root symlinks every directory containing a `SKILL.md` into three mirrors: `~/.claude/skills/<name>`, `~/.gemini/antigravity-cli/skills/<name>`, and `~/.agents/skills/<name>` (Codex and Grok read `~/.agents/skills`), leaving each tool's managed built-ins (e.g. Codex's `.system/`) untouched. The tools only discover skills at the top level of their skills dir, so the mirrors stay flat while this repo stays categorized. Dangling symlinks (from a skill deleted here) get pruned on each run.
 
 ## Authoring rules
 
@@ -38,4 +38,4 @@ Every skill in this repo - new, overhauled, or stolen from someone else's repo -
 
 1. Create `ai/skills/<category>/<skill-name>/SKILL.md` following the rules above.
 2. Run `./install` (or just `git pull` - the repo git hook re-runs dotbot).
-3. Confirm the link landed: `ls ~/.claude/skills/<skill-name>` should resolve in all four skills dirs.
+3. Confirm the link in all three mirrors: `~/.claude/skills/<skill-name>`, `~/.gemini/antigravity-cli/skills/<skill-name>`, and `~/.agents/skills/<skill-name>`. Codex and Grok read `~/.agents/skills`.

@@ -1,4 +1,4 @@
-- clean: ['~']
+- clean: ['~', '~/.claude', '~/.codex']
 
 - link:
     ~/.dotfiles: .
@@ -54,7 +54,16 @@
     description: Configure agy commit skill hook
   - command: |
       src="$PWD/ai/skills"
-      for dir in "$HOME/.claude/skills" "$HOME/.codex/skills" "$HOME/.gemini/antigravity-cli/skills" "$HOME/.agents/skills"; do
+      # Codex now reads ~/.agents/skills; remove only this repo's old skill links.
+      for link in "$HOME/.codex/skills/"* "$HOME/.codex/skills/".*; do
+        [ "$(basename "$link")" = .system ] && continue
+        [ -L "$link" ] || continue
+        resolved="$(python3 -c 'import os, sys; print(os.path.realpath(sys.argv[1]))' "$link")" || continue
+        case "$resolved" in
+          "$src"/*) rm -f "$link" ;;
+        esac
+      done
+      for dir in "$HOME/.claude/skills" "$HOME/.gemini/antigravity-cli/skills" "$HOME/.agents/skills"; do
         # the mirror itself may be a legacy whole-directory symlink; replace with a real dir
         [ -L "$dir" ] && rm -f "$dir"
         mkdir -p "$dir" || continue
@@ -74,4 +83,4 @@
         done
       done
       true
-    description: Link shared skills into Claude, Codex, agy (Antigravity), and Grok (~/.agents/skills)
+    description: Link shared skills into Claude, agy (Antigravity), and Codex/Grok (~/.agents/skills); prune old Codex links
