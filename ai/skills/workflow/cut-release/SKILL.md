@@ -8,7 +8,7 @@ Release the way the repo already releases — detect the pattern from its own hi
 
 ## 1. Sync and confirm the version
 
-- Fetch and pull every branch involved (`main`/`master`, plus `develop` when it exists) before touching anything.
+- Fetch and pull every branch involved (`master`, plus `develop` when it exists) before touching anything.
 - Confirm the target version — bare semver `X.Y.Z`. Given just "cut a release", infer the bump from the pending changes and propose it. A first release is `1.0.0` (`~/brain/conventions/general/first-release-is-1-0-0.md`).
 
 ## 2. Load the rules, detect the pattern
@@ -21,13 +21,13 @@ Read the vault notes that govern releases (every run — they evolve):
 
 Then read the repo itself:
 
-- **Branch model** — `develop` leading `master` = git-flow-lite per the versioning note; no `develop` = trunk, releasing straight off `main`.
+- **Branch model** — `develop` leading `master` = git-flow-lite per the versioning note; no `develop` = trunk, releasing straight off `master`. The branch is always `master`, never `main` (`~/brain/conventions/git/name-the-default-branch-master.md`).
 - **Version home** — grep for the current version string (`composer.json`, `package.json`, a `VERSION` file, a main-class constant). A plugin may carry none — the tag alone is the version (versioning note) — and then the "bump" is changelog + tag only. Craft's `schemaVersion` is migration state; a release leaves it alone.
 - **Tag format** — `git tag --list | tail`: bare-semver lightweight tags (`3.1.0`, never `v3.1.0`) on the `Finalize X.Y.Z release` commit. Older tags may sit on retired `--no-ff` merge commits — match the format, not the placement.
 
 ## 3. Finalize on the working branch
 
-On `develop` (git-flow-lite) or `main` (trunk):
+On `develop` (git-flow-lite) or `master` (trunk):
 
 1. Bump the version in every file found in step 2, if any.
 2. Stamp the changelog: `## Unreleased` becomes `## X.Y.Z - YYYY-MM-DD` (`date +%F`), formatted per the changelog note. Existing entries stay as written; if they're thin, read the diff since the last tag and draft accurate ones.
