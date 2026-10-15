@@ -25,11 +25,20 @@
     ~/.codex/AGENTS.md:
       path: ai/AGENTS.md
       create: true
+    ~/.codex/hooks.json:
+      path: ai/codex/hooks.json
+      force: true
     ~/.gemini/antigravity-cli/AGENTS.md:
       path: ai/AGENTS.md
       create: true
     ~/.grok/AGENTS.md:
       path: ai/AGENTS.md
+      create: true
+    ~/.grok/statusline.sh:
+      path: ai/grok/statusline.sh
+      create: true
+    ~/.grok/hooks/commit-skill.json:
+      path: ai/grok/hooks/commit-skill.json
       create: true
 
 - shell:
@@ -37,8 +46,12 @@
     description: Configure git to use the global gitignore
   - command: git config core.hooksPath .githooks
     description: Re-run dotbot after pulls via repo-tracked git hooks
-  - command: bash ai/codex/apply-statusline.sh
-    description: Configure Codex context status line
+  - command: python3 ai/bin/toml-upsert.py ~/.codex/config.toml ai/codex/config.toml
+    description: Configure Codex status line and memory
+  - command: python3 ai/bin/toml-upsert.py ~/.grok/config.toml ai/grok/config.toml
+    description: Configure Grok compatibility, memory, status line, and Solo MCP
+  - command: bash ai/agy/apply-hooks.sh
+    description: Configure agy commit skill hook
   - command: |
       src="$PWD/ai/skills"
       for dir in "$HOME/.claude/skills" "$HOME/.codex/skills" "$HOME/.gemini/antigravity-cli/skills" "$HOME/.agents/skills"; do

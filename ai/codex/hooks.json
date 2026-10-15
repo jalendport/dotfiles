@@ -1,0 +1,36 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Agent|mcp__solo__spawn_agent|mcp__solo__spawn_process",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "maestro hook codex",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/enforce-commit-skill.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "maestro hook codex",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

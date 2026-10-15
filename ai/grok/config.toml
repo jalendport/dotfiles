@@ -1,0 +1,33 @@
+[compat.claude]
+skills = false
+rules = false
+agents = false
+mcps = false
+hooks = false
+sessions = false
+
+[compat.cursor]
+skills = false
+rules = false
+agents = false
+mcps = false
+hooks = false
+sessions = false
+
+[compat.codex]
+skills = false
+hooks = false
+sessions = false
+
+[memory]
+enabled = false
+
+[memory_v2]
+enabled = false
+
+[ui.status_line]
+type = "command"
+command = "~/.grok/statusline.sh"
+
+[mcp_servers.solo]
+command = "/Applications/Solo.app/Contents/MacOS/mcp"

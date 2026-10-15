@@ -1,0 +1,16 @@
+{
+  "commit-skill": {
+    "PreToolUse": [
+      {
+        "matcher": "run_command",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/enforce-commit-skill.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

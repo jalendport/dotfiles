@@ -6,9 +6,9 @@
 # applied even when the agent forgets to invoke it.
 
 input=$(cat)
-# Claude and Codex send tool_input; Grok sends toolInput through its Claude compat layer.
-cmd=$(printf '%s' "$input" | jq -r '.tool_input.command // .toolInput.command // ""')
-shape=$(printf '%s' "$input" | jq -r 'if .toolInput != null then "grok" else "claude" end')
+# Claude and Codex send tool_input; Grok sends toolInput; agy sends toolCall.
+cmd=$(printf '%s' "$input" | jq -r '.tool_input.command // .toolInput.command // .toolCall.args.CommandLine // ""')
+shape=$(printf '%s' "$input" | jq -r 'if .toolCall != null then "agy" elif .toolInput != null then "grok" else "claude" end')
 
 case "$cmd" in
   *"git commit"*|*"git-commit"*) ;;
@@ -20,7 +20,7 @@ case "$cmd" in
 esac
 
 reason="Commits go through the commit skill. Invoke the commit skill first, then run the commit the way it says (prefixed with COMMIT_SKILL=1)."
-if [ "$shape" = grok ]; then
+if [ "$shape" = grok ] || [ "$shape" = agy ]; then
   jq -n --arg r "$reason" '{decision: "deny", reason: $r}'
   exit 0
 fi

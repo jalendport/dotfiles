@@ -1,0 +1,5 @@
+[tui]
+status_line = ["current-dir", "git-branch", "model-with-reasoning", "context-used"]
+
+[features]
+memories = false
