@@ -9,3 +9,4 @@
 # Delegation
 
 - Hand Tasks to Maestro: `maestro dispatch` for one bounded Task, `maestro run` for an approved Plan, `maestro council` for a review or one question for several minds. Lanes write the code; this session plans, judges, and reads every diff.
+- A Maestro Task title becomes the commit subject, so write every Plan and Brief title as a commit subject per the vault's git convention: imperative verb, sentence case, 4–10 words, no period. This is my layer on top of Maestro; never bake it into Maestro itself.
