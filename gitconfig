@@ -1,0 +1,11 @@
+[user]
+	name = Jalen Davenport
+	email = jalen@jalendport.com
+[init]
+	defaultBranch = master
+[commit]
+	gpgsign = false
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[core]
+	excludesfile = ~/.gitignore

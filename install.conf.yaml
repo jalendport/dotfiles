@@ -39,8 +39,8 @@
       create: true
 
 - shell:
-  - command: git config --global core.excludesfile ~/.gitignore
-    description: Configure git to use the global gitignore
+  - command: git config --global --fixed-value --get-all include.path '~/.dotfiles/gitconfig' > /dev/null || git config --global --add include.path '~/.dotfiles/gitconfig'
+    description: Include the shared global git config
   - command: git config core.hooksPath .githooks
     description: Re-run dotbot after pulls via repo-tracked git hooks
   - command: python3 ai/bin/toml-upsert.py ~/.codex/config.toml ai/codex/config.toml
