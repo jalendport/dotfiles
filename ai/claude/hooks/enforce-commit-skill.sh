@@ -10,10 +10,15 @@ input=$(cat)
 cmd=$(printf '%s' "$input" | jq -r '.tool_input.command // .toolInput.command // .toolCall.args.CommandLine // ""')
 shape=$(printf '%s' "$input" | jq -r 'if .toolCall != null then "agy" elif .toolInput != null then "grok" else "claude" end')
 
-case "$cmd" in
-  *"git commit"*|*"git-commit"*) ;;
-  *) exit 0 ;;
-esac
+# Match a commit only in command position: at the start of a line or after
+# ; && || | ( with optional NAME=value words or env in front. Text inside
+# quotes (a search pattern, a heredoc line, a message) is not a command, so
+# quoted spans are removed before the match.
+stripped=$(printf '%s' "$cmd" | sed -E "s/'[^']*'//g; s/\"[^\"]*\"//g")
+pattern='(^|[;&|(])[[:space:]]*([A-Za-z_][A-Za-z0-9_]*=[^[:space:]]*[[:space:]]+)*(env[[:space:]]+)?(git([[:space:]]+-[^[:space:]]+([[:space:]]+[^-[:space:]][^[:space:]]*)?)*[[:space:]]+commit|git-commit)([[:space:]]|$)'
+if ! printf '%s\n' "$stripped" | grep -Eq "$pattern"; then
+  exit 0
+fi
 
 case "$cmd" in
   *COMMIT_SKILL=1*) exit 0 ;;
