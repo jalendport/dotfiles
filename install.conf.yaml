@@ -37,9 +37,6 @@
     ~/.grok/statusline.sh:
       path: ai/grok/statusline.sh
       create: true
-    ~/.grok/hooks/commit-skill.json:
-      path: ai/grok/hooks/commit-skill.json
-      create: true
 
 - shell:
   - command: git config --global core.excludesfile ~/.gitignore
@@ -52,6 +49,8 @@
     description: Configure Grok compatibility, memory, status line, and Solo MCP
   - command: bash ai/agy/apply-hooks.sh
     description: Configure agy commit skill hook
+  - command: mkdir -p ~/.grok/hooks && rm -f ~/.grok/hooks/commit-skill.json && cp ai/grok/hooks/commit-skill.json ~/.grok/hooks/commit-skill.json
+    description: Copy the Grok commit skill hook (a symlink here makes Grok refuse its workspace sandbox)
   - command: |
       src="$PWD/ai/skills"
       # Codex now reads ~/.agents/skills; remove only this repo's old skill links.
