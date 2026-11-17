@@ -104,6 +104,17 @@
           }
         ]
       }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "maestro hook",
+            "timeout": 10
+          }
+        ]
+      }
     ]
   },
   "disableRemoteControl": true,
