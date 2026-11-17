@@ -47,6 +47,8 @@
     description: Configure Codex status line and memory
   - command: python3 ai/bin/toml-upsert.py ~/.grok/config.toml ai/grok/config.toml
     description: Configure Grok compatibility, memory, status line, and Solo MCP
+  - command: mkdir -p ~/.maestro && python3 ai/bin/toml-upsert.py ~/.maestro/config.toml ai/maestro/config.toml
+    description: Configure Maestro shared settings
   - command: bash ai/agy/apply-hooks.sh
     description: Configure agy commit skill hook
   - command: mkdir -p ~/.grok/hooks && rm -f ~/.grok/hooks/commit-skill.json && cp ai/grok/hooks/commit-skill.json ~/.grok/hooks/commit-skill.json

@@ -1,0 +1,28 @@
+version = 1
+
+[hook]
+scope = "all"
+
+[router]
+orchestrator = "claude-fable"
+
+[accounts.claude]
+harness    = "claude"
+billing    = "subscription"
+plan_price = 200
+reserve    = 0.35
+
+[accounts.codex]
+harness    = "codex"
+billing    = "subscription"
+plan_price = 100
+
+[accounts.grok]
+harness    = "grok"
+billing    = "subscription"
+plan_price = 20
+
+[accounts.agy]
+harness = "agy"
+billing = "metered"
+budget  = { usd = 20, period = "30d" }

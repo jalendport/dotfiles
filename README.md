@@ -11,7 +11,7 @@ These are my personal dotfiles for macOS, linked into place by [Dotbot](https://
 - **`gitignore-global`** - a global gitignore, wired in through `core.excludesfile`
 - **`hushlogin`** - silences the login banner
 - **`bettermouse.plist`** - BetterMouse settings
-- **`ai/`** - one shared `AGENTS.md` that gets linked into [Claude Code](https://code.claude.com), [Codex](https://developers.openai.com/codex), [Grok](https://docs.x.ai), and [Antigravity](https://antigravity.google), plus per-tool settings, status lines, and hooks, and a `skills/` directory that is linked into each tool's own skills folder so every agent sees the same set
+- **`ai/`** - one shared `AGENTS.md` that gets linked into [Claude Code](https://code.claude.com), [Codex](https://developers.openai.com/codex), [Grok](https://docs.x.ai), and [Antigravity](https://antigravity.google), plus per-tool settings, status lines, and hooks, the shared Maestro config, and a `skills/` directory that is linked into each tool's own skills folder so every agent sees the same set
 
 ## Installation
 

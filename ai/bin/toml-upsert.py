@@ -19,8 +19,8 @@ def upsert(target, fragment):
     fragment_text = fragment.read_bytes().decode("utf-8")
     if tomllib:
         tomllib.loads(fragment_text)
-    tables = {}
-    keys = None
+    tables = {"": []}
+    keys = tables[""]
     for line in fragment_text.splitlines():
         if not line.strip() or line.lstrip().startswith("#"):
             continue
@@ -29,8 +29,8 @@ def upsert(target, fragment):
             keys = tables.setdefault(header.group(1).strip(), [])
             continue
         key = KEY.match(line)
-        if keys is None or key is None:
-            raise ValueError("fragment must use table headers and single-line values")
+        if key is None:
+            raise ValueError("fragment must use keys with single-line values")
         # Parsing each assignment also rejects multiline fragment values.
         if tomllib:
             tomllib.loads(line)
@@ -40,7 +40,7 @@ def upsert(target, fragment):
     lines = original.decode("utf-8").splitlines(keepends=True)
     newline = "\r\n" if b"\r\n" in original else "\n"
     for table, assignments in tables.items():
-        start = None
+        start = None if table else -1
         end = len(lines)
         for index, line in enumerate(lines):
             header = TABLE.match(line)
@@ -69,8 +69,10 @@ def upsert(target, fragment):
             else:
                 missing.append(assignment + newline)
         if missing:
-            if not lines[start].endswith(("\n", "\r")):
+            if start >= 0 and not lines[start].endswith(("\n", "\r")):
                 lines[start] += newline
+            if start == -1 and end == 0 and lines:
+                missing.append(newline)
             lines[start + 1:start + 1] = missing
 
     result = "".join(lines).encode("utf-8")
